@@ -1,21 +1,17 @@
 import express, { Application, Request, Response } from 'express';
-import * as dotenv from 'dotenv';
+import config from './config'
 
-// extraction port number from .env file
-dotenv.config();
-const PORT = process.env.PORT || 3000;
-
-// create an instance server
 const app: Application = express();
 
-// add routing for / path "main endpoint"
+
+const serverPort = +(config.port as string) || 3000
+
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello at server 🌍🌏🌎');
+  res.status(200).send('Hello at server 🌍🌏🌎');
 });
 
-// start express server
-app.listen(PORT, () => {
-  console.log(`server is running at http://localhost:${PORT}`);
+app.listen(serverPort, () => {
+  console.log(`server is running at http://localhost:${serverPort}`);
 });
 
 export default app;
