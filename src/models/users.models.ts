@@ -16,7 +16,7 @@ class UserModel {
     return res.rows[0];
   }
 
-  async readUsers(): Promise<User[]> {
+  async readUsers() {
     const conn = await db.connect();
     const sql = `SELECT id, firstname, lastname FROM users;`;
     const res = await conn.query(sql);
@@ -26,7 +26,7 @@ class UserModel {
 
   async readUser(userID: number): Promise<User[]> {
     const conn = await db.connect();
-    const sql = `SELECT * FROM users WHERE id=$1;`;
+    const sql = `SELECT id, firstname, lastname FROM users WHERE id=$1;`;
     const res = await conn.query(sql, [userID]);
     conn.release();
     return res.rows[0];
@@ -35,18 +35,20 @@ class UserModel {
   async deleteUser(userID: number): Promise<void> {
     const conn = await db.connect();
     const sql = `DELETE FROM users WHERE id=$1;`;
-    const res = await conn.query(sql, [userID]);
+    await conn.query(sql, [userID]);
     conn.release();
   }
 
   async updateUser(myUser: User): Promise<User[]> {
     const conn = await db.connect();
-    const sql = `UPDATE users SET firstname=$2, lastname=$3 WHERE id=$1 
-    RETURNING id, firstname, lastname;`;
+    const sql = `UPDATE users SET firstname=$2, lastname=$3, email=$4, password=$5 
+    WHERE id=$1 RETURNING *;`;
     const res = await conn.query(sql, [
       myUser.id,
       myUser.firstname,
-      myUser.lastname
+      myUser.lastname,
+      myUser.email,
+      myUser.password
     ]);
     conn.release();
     return res.rows[0];
