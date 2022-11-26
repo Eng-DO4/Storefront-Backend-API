@@ -15,3 +15,11 @@ Before all, create a `.env` file in the root directory and use these examples to
     PG_USER=postgres
     PG_PASS=postgres123
 ```
+
+## Database
+
+before all you need to create a database localy as below and connect it
+```
+CREATE DATABASE dev;
+\c dev
+```

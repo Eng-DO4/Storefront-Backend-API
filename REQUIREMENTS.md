@@ -1,6 +1,6 @@
 ## API Endpoints
 
-_Don't forget to use the base URL (main endpoint) before endpoints below_
+_Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' before endpoints below_
 
 #### Products
 
@@ -13,7 +13,7 @@ _Don't forget to use the base URL (main endpoint) before endpoints below_
 #### Users
 
 - `users` GET - Index [token required]
-- `users/:id` GET - Show a user (args: user id)[token required]
+- `users/:id` GET - Show an existing user (args: user id)[token required]
 - `users` POST - Create a new user [token required]
 - `users/:id` PUT - Update an existing user (args: user id)[token required]
 - `users/:id` DELETE - Delete an existing user (args: user id)[token required]
