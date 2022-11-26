@@ -1,16 +1,16 @@
 import express, { Application, Request, Response } from 'express';
-import port from './config';
+import routes from './routes';
 
 const app: Application = express();
-
-const serverPort = +(port as unknown as string) || 3000;
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('Hello at server 🌍🌏🌎');
 });
 
-app.listen(serverPort, () => {
-  console.log(`server is running at http://localhost:${serverPort}`);
+app.use('/api', routes);
+
+app.listen(3000, () => {
+  console.log(`server is running at http://localhost:3000`);
 });
 
 export default app;
