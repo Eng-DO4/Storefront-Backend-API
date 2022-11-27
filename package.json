@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node build/index.js",
+    "start": "tsc && node build/index.js",
+    "dev": "nodemon src/index.ts",
+    "test": "tsc && set NODE_ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset",
     "lint:f": "eslint . --fix",
     "format": "prettier --write .",
     "migration:run": "db-migrate up"
@@ -37,6 +39,7 @@
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
     "prettier": "^2.5.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
