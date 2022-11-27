@@ -1,8 +1,8 @@
-// import { Router } from "express";
-// import * as controllers from '../../handlers/orders.controllers'
+import { Router } from "express";
+import * as controllers from '../../handlers/orders.controllers'
 
-// const routes = Router();
+const routes = Router();
 
-// routes.get('/');
+routes.get('/', controllers.index);
 
-// export default routes;
+export default routes;
