@@ -6,15 +6,15 @@ The project is for designing database relation and securing users sensitive data
 
 ## .env
 
-Before all, create a ".env" file in the root directory and use these examples to know the names of variables
+Before all, create a ".env" file in the root directory and use these examples
 ```
-    NODE_ENV
-    PG_PORT
-    PG_HOST
-    PG_DB
-    PG_DB_TEST
-    PG_USER
-    PG_PASS
+    NODE_ENV=dev
+    PG_PORT=5432
+    PG_HOST=localhost
+    PG_DB=dev
+    PG_DB_TEST=test
+    PG_USER=postgres
+    PG_PASS=postgres123
 ```
 
 ## Commands to run
