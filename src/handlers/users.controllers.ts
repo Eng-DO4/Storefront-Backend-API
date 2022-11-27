@@ -47,13 +47,18 @@ export const create = async (req: Request, res: Response) => {
 };
 
 export const update = async (req: Request, res: Response) => {
-  if (req.body !== undefined) {
-    const user = await User.updateUser(req.body);
-    res.json({
-      message: 'user updated successfuly',
-      data: { ...user }
-    });
+  const id = +req.params.id;
+  if (!Number.isNaN(id)) {
+    if (req.body !== undefined) {
+      const user = await User.updateUser(id, req.body);
+      res.json({
+        message: 'user updated successfuly',
+        data: { ...user }
+      });
+    } else {
+      res.send('no body content');
+    }
   } else {
-    res.send('no body content');
+    res.send('error input a number');
   }
 };
