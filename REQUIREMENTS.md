@@ -80,14 +80,12 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
     );
 ```
 
-- `id` as indexing `number`
 - `order_id` for each order `number`
 - `prod_id` for each product in the order `number`
 - `quantity` for each product in the order `number`
 
 ```
     CREATE TABLE IF NOT EXISTS ordered_prods (
-        id SERIAL PRIMARY KEY,
         order_id INTEGER REFERENCES orders(id),
         prod_id INTEGER REFERENCES prods(id),
         quantity INTEGER
