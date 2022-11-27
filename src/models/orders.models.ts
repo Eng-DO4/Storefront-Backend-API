@@ -18,6 +18,14 @@ class OrderModel {
         return res.rows;
     }
 
+    async readCompleteOrders(): Promise<Orders[]> {
+        const conn = await pool.connect();
+        const sql = `SELECT * FROM orders WHERE status='complete'`;
+        const res = await conn.query(sql);
+        conn.release();
+        return res.rows;
+    }
+
     
 }
 

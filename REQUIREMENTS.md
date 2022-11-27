@@ -21,12 +21,14 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 
 #### Orders
 
-- `orders/:user_id` GET - Show all orders (args: user id)[token required]
-- `orders/active/:user_id` GET - Show current orders (args: user id)[token required]
-- `orders/completed/:user_id` GET - Show complete orders (args: user id)[token required]
+- `orders/` GET - Index all orders [token required]
+- `orders/:user_id` GET - Index all orders for one user (args: user id)[token required]
 - `orders/:user_id` POST - Make an order (args: user id)[token required]
+- `orders/active` GET - Index current orders [token required]
+- `orders/active/:user_id` GET - Show current order for one user (args: user id)[token required]
+- `orders/complete` GET - Index complete orders [token required]
+- `orders/complete/:user_id` GET - Show complete orders for one user (args: user id)[token required]
 - `orders/:order_id` PUT - Update an active order to be complete (args: order id)[token required]
-- `orders/:order_id` DELETE - Delete an active status order (args: order id)[token required]
 
 ## Data Shapes
 
