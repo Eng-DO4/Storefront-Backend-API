@@ -6,8 +6,6 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node build/index.js",
-    "test": "npm run build && jasmine",
-    "lint": "eslint .",
     "lint:f": "eslint . --fix",
     "format": "prettier --write .",
     "migration:run": "db-migrate up"

@@ -26,3 +26,12 @@ before all you need to create a tset database localy as below and connect it
 CREATE DATABASE test;
 \c test
 ```
+
+## Commands to run
+
+0. `npm i` to install dependencies
+1. `npm run build` to only build the API JS file
+2. `npm run start` to build JS files and run the server
+3. `npm run format` to format the code with prettier
+4. `npm run lint:f` to fix errors and warnings with eslint
+5. `npm run migration:run` to run all migration up sqls [you need to check the 'database' section]

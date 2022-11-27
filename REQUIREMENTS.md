@@ -20,7 +20,7 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 
 #### Orders
 
-- `orders` GET - Index
+- `orders` GET - Index [token required]
 - `order/:user_id` GET - Show an active order (args: user id)[token required]
 - `orders/:user_id` GET - Show completed orders (args: user id)[token required]
 - `order/:user_id` POST - Create a new order (args: user id)[token required]
@@ -41,7 +41,7 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
     CREATE TABLE prods (
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
-        price smallmoney NOT NULL,
+        price decimal NOT NULL,
         category VARCHAR(50),
         description text
     );
