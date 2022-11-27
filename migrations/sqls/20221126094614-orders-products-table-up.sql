@@ -1,7 +1,7 @@
 -- create table
-CREATE TABLE ordered_prods (
+CREATE TABLE IF NOT EXISTS ordered_prods (
     id SERIAL PRIMARY KEY,
-    order_id bigint REFERENCES orders(id),
-    prod_id bigint REFERENCES prods(id),
-    quantity integer
+    order_id INTEGER REFERENCES orders(id),
+    prod_id INTEGER REFERENCES prods(id),
+    quantity INTEGER
 );

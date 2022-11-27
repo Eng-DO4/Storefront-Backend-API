@@ -1,8 +1,8 @@
 -- create table
-CREATE TABLE prods (
+CREATE TABLE IF NOT EXISTS prods (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    price decimal NOT NULL,
+    price DECIMAL NOT NULL,
     category VARCHAR(50),
-    description text
+    description TEXT
 );
