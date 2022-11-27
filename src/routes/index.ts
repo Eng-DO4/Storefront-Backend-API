@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import usersRoutes from './api/users.routes';
 // import prodsRoutes from './api/prods.routes';
 // import ordersRoutes from './api/orders.routes';
