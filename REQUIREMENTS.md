@@ -6,9 +6,10 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 
 - `prods` GET - Index
 - `prods/:id` GET - Show a product (args: product id)
+- `prods/:category` GET - Show a product (args: product category)
 - `prods` POST - Create a new product [token required]
-- `top5prods` GET - Show the top 5 most popular products
-- `prods/:category` GET - Show products (args: product category)
+- `prods/:id` PUT - Update an existing product (args: prod id)[token required]
+- `prods/:id` DELETE - Delete an existing product (args: prod id)[token required]
 
 #### Users
 
