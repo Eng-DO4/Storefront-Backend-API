@@ -1,0 +1,20 @@
+# Environment indicator (dev, prod, test)
+ENV
+
+# Database port
+PG_PORT
+
+# Database host
+PG_HOST
+
+# Database name (for development)
+PG_DB
+
+# Database name (for testing)
+PG_DB_TEST
+
+# Database user
+PG_USER
+
+# Database password
+PG_PASS

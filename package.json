@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "tsc && node build/index.js",
     "dev": "nodemon src/index.ts",
-    "test": "SET ENV=test && db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "test": "tsc && set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset",
     "lint:f": "eslint . --fix",
     "format": "prettier --write .",
     "migration:run": "db-migrate up"

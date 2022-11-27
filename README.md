@@ -6,21 +6,13 @@ The project is for designing database relation and securing users sensitive data
 
 ## .env
 
-Before all, create a ".env" file in the root directory and use these examples
-
-```
-    NODE_ENV=dev
-    PG_PORT=5432
-    PG_HOST=localhost
-    PG_DB=dev
-    PG_DB_TEST=test
-    PG_USER=postgres
-    PG_PASS=postgres123
-```
+Before all, create a ".env" file in the root directory and use variables as shown in 'ENV_EXAMPLES'
 
 ## Commands to run
 
 0. `npm i` to install dependencies
 1. `npm run build` to only build the API JS file
 2. `npm run start` to build JS files and run the server
-3. `npm run test` to run all migration up sqls [you need to check the 'SQL_REF.sql' file first]
+3. `npm run dev` to start server without building JS files
+4. `npm run migration:run` to migrate up sql files on dev db
+5. `npm run test` to migrate up sql files on test db [you need to follow 'SQL_REF.sql' file first]

@@ -5,8 +5,8 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 #### Products
 
 - `prods` GET - Index
-- `prods/:id` GET - Show a product (args: product id)
-- `prods/:category` GET - Show a product (args: product category)
+- `prods/id/:id` GET - Show a product (args: product id)
+- `prods/cat/:category` GET - Show a product (args: product category)
 - `prods` POST - Create a new product [token required]
 - `prods/:id` PUT - Update an existing product (args: prod id)[token required]
 - `prods/:id` DELETE - Delete an existing product (args: prod id)[token required]
@@ -21,12 +21,12 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 
 #### Orders
 
-- `orders` GET - Index [token required]
-- `order/:user_id` GET - Show an active order (args: user id)[token required]
-- `orders/:user_id` GET - Show completed orders (args: user id)[token required]
-- `order/:user_id` POST - Create a new order (args: user id)[token required]
-- `order/:order_id` PUT - Update an active status order to be complete status (args: order id)[token required]
-- `order/:order_id` DELETE - Delete an active status order (args: order id)[token required]
+- `orders/:user_id` GET - Show all orders (args: user id)[token required]
+- `orders/active/:user_id` GET - Show current orders (args: user id)[token required]
+- `orders/completed/:user_id` GET - Show complete orders (args: user id)[token required]
+- `orders/:user_id` POST - Make an order (args: user id)[token required]
+- `orders/:order_id` PUT - Update an active order to be complete (args: order id)[token required]
+- `orders/:order_id` DELETE - Delete an active status order (args: order id)[token required]
 
 ## Data Shapes
 
@@ -39,12 +39,12 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 - `description` for each product `string`
 
 ```
-    CREATE TABLE prods (
+    CREATE TABLE IF NOT EXISTS prods (
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
-        price decimal NOT NULL,
+        price DECIMAL NOT NULL,
         category VARCHAR(50),
-        description text
+        description TEXT
     );
 ```
 
@@ -57,7 +57,7 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 - `password` of the user `string`
 
 ```
-    CREATE TABLE users (
+    CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         firstname VARCHAR(50) NOT NULL,
         lastname VARCHAR(50) NOT NULL,
@@ -73,23 +73,23 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 - `status` of the order `string`
 
 ```
-    CREATE TABLE orders (
+    CREATE TABLE IF NOT EXISTS orders (
         id SERIAL PRIMARY KEY,
-        user_id bigint REFERENCES users(id),
+        user_id INTEGER REFERENCES users(id),
         status VARCHAR(50) DEFAULT 'active'
     );
 ```
 
-- `id` for each order-products relationship `number`
-- `order_id` for an order `number`
-- `prod_id` for each product in that order `number`
-- `quantity` for each product in that order `number`
+- `id` as indexing `number`
+- `order_id` for each order `number`
+- `prod_id` for each product in the order `number`
+- `quantity` for each product in the order `number`
 
 ```
-    CREATE TABLE ordered_prods (
+    CREATE TABLE IF NOT EXISTS ordered_prods (
         id SERIAL PRIMARY KEY,
-        order_id bigint REFERENCES orders(id),
-        prod_id bigint REFERENCES prods(id),
-        quantity integer
+        order_id INTEGER REFERENCES orders(id),
+        prod_id INTEGER REFERENCES prods(id),
+        quantity INTEGER
     );
 ```
