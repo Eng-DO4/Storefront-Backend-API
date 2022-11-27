@@ -7,6 +7,7 @@ The project is for designing database relation and securing users sensitive data
 ## .env
 
 Before all, create a ".env" file in the root directory and use these examples
+
 ```
     NODE_ENV=dev
     PG_PORT=5432
@@ -22,4 +23,4 @@ Before all, create a ".env" file in the root directory and use these examples
 0. `npm i` to install dependencies
 1. `npm run build` to only build the API JS file
 2. `npm run start` to build JS files and run the server
-3. `npm run migration:run` to run all migration up sqls [you need to check the 'SQL_REF.sql' file]
+3. `npm run test` to run all migration up sqls [you need to check the 'SQL_REF.sql' file first]
