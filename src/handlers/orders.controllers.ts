@@ -23,3 +23,40 @@ export const indexComplete = async (_req: Request, res: Response) => {
     data: { ...orders }
   });
 };
+
+
+export const show = async (req: Request, res: Response) => {
+    const id = +req.params.id;
+    if (!Number.isNaN(id)) {
+      const orders = await Order.showOrders(id);
+      res.json({
+        data: { ...orders }
+      });
+    } else {
+      res.send('error input a number');
+    }
+};
+
+export const showActive = async (req: Request, res: Response) => {
+    const id = +req.params.id;
+    if (!Number.isNaN(id)) {
+      const orders = await Order.showActiveOrders(id);
+      res.json({
+        data: { ...orders }
+      });
+    } else {
+      res.send('error input a number');
+    }
+};
+
+export const showComplete = async (req: Request, res: Response) => {
+    const id = +req.params.id;
+    if (!Number.isNaN(id)) {
+      const orders = await Order.showCompleteOrders(id);
+      res.json({
+        data: { ...orders }
+      });
+    } else {
+      res.send('error input a number');
+    }
+};
