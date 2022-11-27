@@ -13,4 +13,4 @@ CREATE DATABASE test;
 ---- * `npm run dbtest`
 
 -- to solve a problem with ids after deleting
-ALTER SEQUENCE <table_name> <table_name>_id_seq RESTART WITH 1;
+ALTER SEQUENCE <table_name>_id_seq RESTART WITH 1;
