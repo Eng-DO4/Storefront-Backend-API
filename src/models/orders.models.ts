@@ -1,5 +1,5 @@
 import pool from "../database";
-import { Orders_users, Orders_prods } from "../types/orders.types";
+import { Orders_users } from "../types/orders.types";
 
 class OrderModel {
     async readOrders(): Promise<Orders_users[]> {

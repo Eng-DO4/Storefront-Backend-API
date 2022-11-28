@@ -1,6 +1,20 @@
 import pool from '../database';
 import User from '../types/users.types';
-import { hashPass } from '../hachPass';
+import bcrypt from 'bcrypt';
+import config from '../config'
+
+class Hashing {
+    hashPass(pass: string): string {
+        const salt = +(config.salt as string);
+        return bcrypt.hashSync(`${pass}${config.pepper}`, salt);
+    };
+
+    isValid(pass: string, hashedPass: string): boolean {
+        return bcrypt.compareSync(this.hashPass(pass), hashedPass);
+    };
+}
+
+const Hash = new Hashing()
 
 class UserModel {
   async createUser(myUser: User): Promise<User[]> {
@@ -11,7 +25,7 @@ class UserModel {
       myUser.firstname,
       myUser.lastname,
       myUser.email,
-      hashPass(myUser.password)
+      Hash.hashPass(myUser.password)
     ]);
     conn.release();
     return res.rows[0];
@@ -49,10 +63,27 @@ class UserModel {
       myUser.firstname,
       myUser.lastname,
       myUser.email,
-      hashPass(myUser.password)
+      Hash.hashPass(myUser.password)
     ]);
     conn.release();
     return res.rows[0];
+  }
+
+  async authenticate(email: string, pass:string): Promise<User | null> {
+    const conn = await pool.connect();
+    let sql = `SELECT password FROM users WHERE email=$1;`;
+    let res = await conn.query(sql, [email]);
+    if(res.rows.length) {
+      const {pass: hashedPass} = res.rows[0];
+      if (Hash.isValid(pass, hashedPass)) {
+        sql = `SELECT * FROM users WHERE email=$1`;
+        res = await conn.query(sql, [email]);
+        conn.release();
+        return res.rows[0];
+      }
+    }
+    conn.release();
+    return null;
   }
 }
 

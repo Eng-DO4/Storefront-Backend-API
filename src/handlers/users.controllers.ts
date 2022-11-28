@@ -62,3 +62,16 @@ export const update = async (req: Request, res: Response) => {
     res.send('error input a number');
   }
 };
+
+export const auth = async (req:Request, res:Response) => {
+  if (req.body !== undefined) {
+    console.log(req.body)
+    const {email: mail, password: pass} = req.body
+    const user = await User.authenticate(mail as string, pass as string);
+    res.json({
+      data: { ...user }
+    });
+  } else {
+    res.send('no body content');
+  }
+};
