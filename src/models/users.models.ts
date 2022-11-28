@@ -1,5 +1,6 @@
 import pool from '../database';
 import User from '../types/users.types';
+import { hashPass } from '../hachPass';
 
 class UserModel {
   async createUser(myUser: User): Promise<User[]> {
@@ -10,7 +11,7 @@ class UserModel {
       myUser.firstname,
       myUser.lastname,
       myUser.email,
-      myUser.password
+      hashPass(myUser.password)
     ]);
     conn.release();
     return res.rows[0];
@@ -48,7 +49,7 @@ class UserModel {
       myUser.firstname,
       myUser.lastname,
       myUser.email,
-      myUser.password
+      hashPass(myUser.password)
     ]);
     conn.release();
     return res.rows[0];

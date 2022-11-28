@@ -1,7 +1,12 @@
-type Orders = {
+export type Orders_prods = {
   id?: number;
-  status: string;
+  orderID: number;
+  prodID: number;
   quantity: number;
 };
 
-export default Orders;
+export type Orders_users = {
+  userID: number;
+  orderID: number;
+  status: string;
+};
