@@ -2,10 +2,22 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { ENV, PG_PORT, PG_HOST, PG_DB, PG_DB_TEST, PG_USER, PG_PASS, BCRYPT_PASS, SALT_ROUNDS, TOKEN_SECRET } =
-  process.env;
+const {
+  PORT,
+  ENV,
+  PG_PORT,
+  PG_HOST,
+  PG_DB,
+  PG_DB_TEST,
+  PG_USER,
+  PG_PASS,
+  BCRYPT_PASS,
+  SALT_ROUNDS,
+  TOKEN_SECRET
+} = process.env;
 
 export default {
+  port: PORT,
   status: ENV,
   host: PG_HOST,
   dbPort: PG_PORT,

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import OrderModel from '../models/orders.models';
+import { OrderModel } from '../models/orders.models';
 
 const Order = new OrderModel();
 
@@ -24,39 +24,38 @@ export const indexComplete = async (_req: Request, res: Response) => {
   });
 };
 
-
 export const show = async (req: Request, res: Response) => {
-    const id = +req.params.id;
-    if (!Number.isNaN(id)) {
-      const orders = await Order.showOrders(id);
-      res.json({
-        data: { ...orders }
-      });
-    } else {
-      res.send('error input a number');
-    }
+  const id = +req.params.id;
+  if (!Number.isNaN(id)) {
+    const orders = await Order.showOrders(id);
+    res.json({
+      data: { ...orders }
+    });
+  } else {
+    res.send('error input a number');
+  }
 };
 
 export const showActive = async (req: Request, res: Response) => {
-    const id = +req.params.id;
-    if (!Number.isNaN(id)) {
-      const orders = await Order.showActiveOrders(id);
-      res.json({
-        data: { ...orders }
-      });
-    } else {
-      res.send('error input a number');
-    }
+  const id = +req.params.id;
+  if (!Number.isNaN(id)) {
+    const orders = await Order.showActiveOrders(id);
+    res.json({
+      data: { ...orders }
+    });
+  } else {
+    res.send('error input a number');
+  }
 };
 
 export const showComplete = async (req: Request, res: Response) => {
-    const id = +req.params.id;
-    if (!Number.isNaN(id)) {
-      const orders = await Order.showCompleteOrders(id);
-      res.json({
-        data: { ...orders }
-      });
-    } else {
-      res.send('error input a number');
-    }
+  const id = +req.params.id;
+  if (!Number.isNaN(id)) {
+    const orders = await Order.showCompleteOrders(id);
+    res.json({
+      data: { ...orders }
+    });
+  } else {
+    res.send('error input a number');
+  }
 };

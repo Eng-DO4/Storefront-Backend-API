@@ -1,54 +1,90 @@
-import pool from "../database";
-import { Orders_users } from "../types/orders.types";
+import pool from '../database';
 
-class OrderModel {
-    async readOrders(): Promise<Orders_users[]> {
-        const conn = await pool.connect();
-        const sql = `SELECT * FROM orders`;
-        const res = await conn.query(sql);
-        conn.release();
-        return res.rows;
-    }
+export type Orders_prods = {
+  id?: number;
+  orderID: number;
+  prodID: number;
+  quantity: number;
+};
 
-    async readActiveOrders(): Promise<Orders_users[]> {
-        const conn = await pool.connect();
-        const sql = `SELECT * FROM orders WHERE status='active';`;
-        const res = await conn.query(sql);
-        conn.release();
-        return res.rows;
-    }
+export type Orders_users = {
+  userID: number;
+  orderID: number;
+  status: string;
+};
 
-    async readCompleteOrders(): Promise<Orders_users[]> {
-        const conn = await pool.connect();
-        const sql = `SELECT * FROM orders WHERE status='complete';`;
-        const res = await conn.query(sql);
-        conn.release();
-        return res.rows;
+export class OrderModel {
+  async readOrders(): Promise<Orders_users[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `SELECT * FROM orders`;
+      const res = await conn.query(sql);
+      conn.release();
+      return res.rows;
+    } catch (error) {
+      throw new Error(`Cannot read orders ${error}`);
     }
+  }
 
-    async showOrders(orderID: number): Promise<Orders_users[]> {
-        const conn = await pool.connect();
-        const sql = `SELECT * FROM orders WHERE id=$1;`;
-        const res = await conn.query(sql, [orderID]);
-        conn.release();
-        return res.rows[0];
+  async readActiveOrders(): Promise<Orders_users[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `SELECT * FROM orders WHERE status='active';`;
+      const res = await conn.query(sql);
+      conn.release();
+      return res.rows;
+    } catch (error) {
+      throw new Error(`Cannot Read orders ${error}`);
     }
+  }
 
-    async showActiveOrders(orderID: number): Promise<Orders_users[]> {
-        const conn = await pool.connect();
-        const sql = `SELECT * FROM orders WHERE id=$1 AND status='active';`;
-        const res = await conn.query(sql, [orderID]);
-        conn.release();
-        return res.rows[0];
+  async readCompleteOrders(): Promise<Orders_users[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `SELECT * FROM orders WHERE status='complete';`;
+      const res = await conn.query(sql);
+      conn.release();
+      return res.rows;
+    } catch (error) {
+      throw new Error(`Cannot read orders ${error}`);
     }
+  }
 
-    async showCompleteOrders(orderID: number): Promise<Orders_users[]> {
-        const conn = await pool.connect();
-        const sql = `SELECT * FROM orders WHERE id=$1 AND status='complete';`;
-        const res = await conn.query(sql, [orderID]);
-        conn.release();
-        return res.rows[0];
+  async showOrders(orderID: number): Promise<Orders_users[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `SELECT * FROM orders WHERE id=$1;`;
+      const res = await conn.query(sql, [orderID]);
+      conn.release();
+      return res.rows[0];
+    } catch (error) {
+      throw new Error(`Cannot read this order's data ${error}`);
     }
+  }
+
+  async showActiveOrders(orderID: number): Promise<Orders_users[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `SELECT * FROM orders WHERE id=$1 AND status='active';`;
+      const res = await conn.query(sql, [orderID]);
+      conn.release();
+      return res.rows[0];
+    } catch (error) {
+      throw new Error(`Cannot read this order's data ${error}`);
+    }
+  }
+
+  async showCompleteOrders(orderID: number): Promise<Orders_users[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `SELECT * FROM orders WHERE id=$1 AND status='complete';`;
+      const res = await conn.query(sql, [orderID]);
+      conn.release();
+      return res.rows[0];
+    } catch (error) {
+      throw new Error(`Cannot read this order's data ${error}`);
+    }
+  }
 }
 
 export default OrderModel;

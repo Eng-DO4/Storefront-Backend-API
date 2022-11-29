@@ -1,2 +1,2 @@
 -- delete table
-DROP TABLE IF NOT EXISTS users CASCADE;
+DROP TABLE IF EXISTS users CASCADE;

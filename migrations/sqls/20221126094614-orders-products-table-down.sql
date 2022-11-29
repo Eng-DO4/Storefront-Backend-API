@@ -1,2 +1,2 @@
 -- delete table
-DROP TABLE IF NOT EXISTS ordered_prods CASCADE;
+DROP TABLE IF EXISTS ordered_prods CASCADE;

@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import bp from 'body-parser';
 import routes from './routes';
+import config from './config';
 
 const app: Application = express();
 
@@ -13,8 +14,10 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api', routes);
 
-app.listen(3000, () => {
-  console.log(`server is running at http://localhost:3000`);
+const port: number = +(config.port as string);
+
+app.listen(port, () => {
+  console.log(`server is running at http://localhost:${port}`);
 });
 
 export default app;
