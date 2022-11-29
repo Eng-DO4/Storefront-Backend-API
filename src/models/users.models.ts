@@ -66,17 +66,6 @@ export class UserModel {
     }
   }
 
-  async deleteUser(userID: number): Promise<void> {
-    try {
-      const conn = await pool.connect();
-      const sql = `DELETE FROM users WHERE id=$1;`;
-      await conn.query(sql, [userID]);
-      conn.release();
-    } catch (error) {
-      throw new Error(`Cannot delete user ${error}`);
-    }
-  }
-
   async updateUser(userID: number, myUser: User): Promise<User[]> {
     try {
       const conn = await pool.connect();
@@ -93,6 +82,17 @@ export class UserModel {
       return res.rows[0];
     } catch (error) {
       throw new Error(`Cannot change user's data`);
+    }
+  }
+
+  async deleteUser(userID: number): Promise<void> {
+    try {
+      const conn = await pool.connect();
+      const sql = `DELETE FROM users WHERE id=$1;`;
+      await conn.query(sql, [userID]);
+      conn.release();
+    } catch (error) {
+      throw new Error(`Cannot delete user ${error}`);
     }
   }
 

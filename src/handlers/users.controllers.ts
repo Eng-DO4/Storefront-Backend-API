@@ -4,21 +4,30 @@ import { UserModel } from '../models/users.models';
 const User = new UserModel();
 
 export const index = async (_req: Request, res: Response) => {
-  const users = await User.readUsers();
-  res.json({
-    data: { ...users }
-  });
+  try {
+    const users = await User.readUsers();
+    res.json({
+      message: `this is index method`,
+      data: { ...users }
+    });
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 export const del = async (req: Request, res: Response) => {
-  const id = +req.params.id;
-  if (!Number.isNaN(id)) {
-    await User.deleteUser(id);
-    res.json({
-      message: 'deleted successfully'
-    });
-  } else {
-    res.send('error input a number');
+  try {
+    const id = +req.params.id;
+    if (!Number.isNaN(id)) {
+      await User.deleteUser(id);
+      res.json({
+        message: 'deleted successfully'
+      });
+    } else {
+      res.send('error input a number');
+    }
+  } catch (error) {
+    res.status(400).send(error);
   }
 };
 
