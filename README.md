@@ -49,23 +49,16 @@ you need to follow these sqls to create databases and connect them. run sqls in 
 ```
     -- run sqls in psql shell
 
-    -- Create new user
-    CREATE USER <title for user> WITH PASSWORD <any pass btw two sigle qoutes>;
-
     -- Create 2 databases
     CREATE DATABASE <database for development>;
     CREATE DATABASE <database for testing>;
-
-    -- Grant all database privileges to user in both databases
-    GRANT ALL PRIVILEGES ON DATABASE <dev db created above> TO <user created above>;
-    GRANT ALL PRIVILEGES ON DATABASE <test db created above> TO <user created above>;
 
     -- run commands in teminal
     ---- * `npm run migration:run`
     ---- * `npm run test`
 
-    -- to solve a problem with ids after deleting all rows
-    ALTER SEQUENCE <table_name>_id_seq RESTART WITH 1;
+    -- to solve a problem with ids after bad requests
+    ALTER SEQUENCE <table name>_id_seq RESTART WITH <the number after last id>;
 ```
 
 ## Commands to run

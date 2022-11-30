@@ -36,7 +36,7 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 - `users/:id` GET - Show an existing user (args: user id)
 - `users/:id` PATCH - Update an existing user (args: user id)
 - `users/:id` DELETE - Delete an existing user (args: user id)
-- `users/auth/:email` POST - Show an authenticated user
+- `users/auth` POST - Show an authenticated user
 ```
 enter data in json format like this:
     {

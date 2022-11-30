@@ -1,4 +1,4 @@
-import { Orders_users, OrderModel} from '../../models/orders.models';
+import { OrderModel} from '../../models/orders.models';
 
 const order = new OrderModel();
 
@@ -14,12 +14,12 @@ describe ('orderss model', () => {
         expect(order.readCompleteOrders).toBeDefined();
     });
     it('should have a read method to orders of a user', () => {
-        expect(order.showOrders).toBeDefined();
+        expect(order.showOrder).toBeDefined();
     });
     it('should have a read method to only active orders of a user', () => {
-        expect(order.showActiveOrders).toBeDefined();
+        expect(order.showActiveOrder).toBeDefined();
     });
     it('should have a read method to only complete orders of a user', () => {
-        expect(order.showCompleteOrders).toBeDefined();
+        expect(order.showCompleteOrder).toBeDefined();
     });
 })

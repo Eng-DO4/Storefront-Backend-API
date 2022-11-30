@@ -1,4 +1,4 @@
-import { User, UserModel, Hashing} from '../../models/users.models';
+import { UserModel } from '../../models/users.models';
 
 const user = new UserModel();
 

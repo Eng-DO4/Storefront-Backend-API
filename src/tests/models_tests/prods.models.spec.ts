@@ -1,4 +1,4 @@
-import { Prod, ProdModel} from '../../models/prods.models';
+import { ProdModel} from '../../models/prods.models';
 
 const user = new ProdModel();
 
