@@ -4,20 +4,46 @@ _Don't forget to use the base URL (main endpoint) 'http://localhost:3000/api/' b
 
 #### Products
 
+- `prods` POST - Create a new product
+```
+    enter data in json format like this:
+    {
+        "name": "prod1",
+        "price": 10,
+        "category": "cat1",
+        "description": "a new product from different category"
+    }
+```
 - `prods` GET - Index
 - `prods/id/:id` GET - Show a product (args: product id)
 - `prods/cat/:category` GET - Show a product (args: product category)
-- `prods` POST - Create a new product [token required]
-- `prods/:id` PUT - Update an existing product (args: prod id)[token required]
-- `prods/:id` DELETE - Delete an existing product (args: prod id)[token required]
+- `prods/:id` PATCH - Update an existing product (args: prod id)
+- `prods/:id` DELETE - Delete an existing product (args: prod id)
 
 #### Users
 
-- `users` GET - Index [token required]
-- `users/:id` GET - Show an existing user (args: user id)[token required]
-- `users` POST - Create a new user [token required]
-- `users/:id` PUT - Update an existing user (args: user id)[token required]
-- `users/:id` DELETE - Delete an existing user (args: user id)[token required]
+- `users` POST - Create a new user
+```
+    enter data in json format like this:
+    {
+        "firstname": "child",
+        "lastname": "parent",
+        "email": "child.parent@m.com",
+        "password": "mypass123"
+    }
+```
+- `users` GET - Index
+- `users/:id` GET - Show an existing user (args: user id)
+- `users/:id` PATCH - Update an existing user (args: user id)
+- `users/:id` DELETE - Delete an existing user (args: user id)
+- `users/auth/:email` POST - Show an authenticated user
+```
+enter data in json format like this:
+    {
+        "email": "child.parent@m.com",
+        "password": "mypass123"
+    }
+``` 
 
 #### Orders
 

@@ -23,7 +23,7 @@ export class ProdModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot create the product ${error}`);
+      throw new Error(`Cannot create the product: ${error}`);
     }
   }
 
@@ -35,7 +35,7 @@ export class ProdModel {
       conn.release();
       return res.rows;
     } catch (error) {
-      throw new Error(`Cannot read products ${error}`);
+      throw new Error(`Cannot list products: ${error}`);
     }
   }
 
@@ -47,7 +47,7 @@ export class ProdModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot read this product ${error}`);
+      throw new Error(`Cannot read this product: ${error}`);
     }
   }
 
@@ -59,18 +59,7 @@ export class ProdModel {
       conn.release();
       return res.rows;
     } catch (error) {
-      throw new Error(`Cannot read this product ${error}`);
-    }
-  }
-
-  async deleteProd(prodID: number): Promise<void> {
-    try {
-      const conn = await pool.connect();
-      const sql = `DELETE FROM prods WHERE id=$1;`;
-      await conn.query(sql, [prodID]);
-      conn.release();
-    } catch (error) {
-      throw new Error(`Cannot delete this product ${error}`);
+      throw new Error(`Cannot read this product: ${error}`);
     }
   }
 
@@ -89,7 +78,22 @@ export class ProdModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot update this product ${error}`);
+      throw new Error(`Cannot update this product: ${error}`);
+    }
+  }
+
+  async deleteProd(prodID: number): Promise<Prod[]> {
+    try {
+      const conn = await pool.connect();
+      let sql = `SELECT * FROM prods WHERE id=$1;`;
+      let res = await conn.query(sql, [prodID]);
+      const deleted = res.rows[0];
+      sql = `DELETE FROM prods WHERE id=$1;`;
+      await conn.query(sql, [prodID]);
+      conn.release();
+      return deleted;
+    } catch (error) {
+      throw new Error(`Cannot delete this product: ${error}`);
     }
   }
 }

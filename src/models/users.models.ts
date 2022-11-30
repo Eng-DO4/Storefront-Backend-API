@@ -28,7 +28,7 @@ export class UserModel {
     try {
       const conn = await pool.connect();
       const sql = `INSERT INTO users (firstname, lastname, email, password) 
-      VALUES ($1, $2, $3, $4) RETURNING firstname, lastname;`;
+      VALUES ($1, $2, $3, $4) RETURNING *;`;
       const res = await conn.query(sql, [
         myUser.firstname,
         myUser.lastname,
@@ -45,7 +45,7 @@ export class UserModel {
   async readUsers(): Promise<User[]> {
     try {
       const conn = await pool.connect();
-      const sql = `SELECT id, firstname, lastname FROM users;`;
+      const sql = `SELECT * FROM users;`;
       const res = await conn.query(sql);
       conn.release();
       return res.rows;
@@ -57,12 +57,12 @@ export class UserModel {
   async readUser(userID: number): Promise<User[]> {
     try {
       const conn = await pool.connect();
-      const sql = `SELECT id, firstname, lastname FROM users WHERE id=$1;`;
+      const sql = `SELECT * FROM users WHERE id=$1;`;
       const res = await conn.query(sql, [userID]);
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot read user's data`);
+      throw new Error(`Cannot read user's data: ${error}`);
     }
   }
 
@@ -70,7 +70,7 @@ export class UserModel {
     try {
       const conn = await pool.connect();
       const sql = `UPDATE users SET firstname=$2, lastname=$3, email=$4, password=$5 
-      WHERE id=$1 RETURNING firstname, lastname;`;
+      WHERE id=$1 RETURNING *;`;
       const res = await conn.query(sql, [
         userID,
         myUser.firstname,
@@ -81,18 +81,22 @@ export class UserModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot change user's data`);
+      throw new Error(`Cannot change user's data: ${error}`);
     }
   }
 
-  async deleteUser(userID: number): Promise<void> {
+  async deleteUser(userID: number): Promise<User[]> {
     try {
       const conn = await pool.connect();
-      const sql = `DELETE FROM users WHERE id=$1;`;
+      let sql = `SELECT * FROM users WHERE id=$1;`;
+      const res = await conn.query(sql, [userID]);
+      const deleted = res.rows[0];
+      sql = `DELETE FROM users WHERE id=$1;`;
       await conn.query(sql, [userID]);
       conn.release();
+      return deleted;
     } catch (error) {
-      throw new Error(`Cannot delete user ${error}`);
+      throw new Error(`Cannot delete user: ${error}`);
     }
   }
 
@@ -113,7 +117,7 @@ export class UserModel {
       conn.release();
       return null;
     } catch (error) {
-      throw new Error(`Not authenticated ${error}`);
+      throw new Error(`Not authenticated: ${error}`);
     }
   }
 }
