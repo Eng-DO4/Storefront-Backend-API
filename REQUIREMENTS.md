@@ -47,12 +47,12 @@ enter data in json format like this:
 
 #### Orders
 
-- `orders/` GET - Index all orders [token required]
-- `orders/:user_id` GET - Index all orders for one user (args: user id)[token required]
-- `orders/active` GET - Index current orders [token required]
-- `orders/active/:user_id` GET - Show current order for one user (args: user id)[token required]
-- `orders/complete` GET - Index complete orders [token required]
-- `orders/complete/:user_id` GET - Show complete orders for one user (args: user id)[token required]
+- `orders/` GET - Index all orders
+- `orders/active` GET - Index current orders
+- `orders/complete` GET - Index complete orders
+- `orders/:order_id` GET - Show an order (args: order id)
+- `orders/active/:order_id` GET - Show a current order (args: order id)
+- `orders/complete/:order_id` GET - Show a complete order (args: order id)
 
 ## Data Shapes
 

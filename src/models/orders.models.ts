@@ -1,11 +1,11 @@
 import pool from '../database';
 
-export type Orders_prods = {
-  id?: number;
-  orderID: number;
-  prodID: number;
-  quantity: number;
-};
+// type Orders_prods = {
+//   id?: number;
+//   orderID: number;
+//   prodID: number;
+//   quantity: number;
+// };
 
 export type Orders_users = {
   userID: number;
@@ -22,7 +22,7 @@ export class OrderModel {
       conn.release();
       return res.rows;
     } catch (error) {
-      throw new Error(`Cannot read orders ${error}`);
+      throw new Error(`Cannot list orders: ${error}`);
     }
   }
 
@@ -34,7 +34,7 @@ export class OrderModel {
       conn.release();
       return res.rows;
     } catch (error) {
-      throw new Error(`Cannot Read orders ${error}`);
+      throw new Error(`Cannot list active orders: ${error}`);
     }
   }
 
@@ -46,11 +46,11 @@ export class OrderModel {
       conn.release();
       return res.rows;
     } catch (error) {
-      throw new Error(`Cannot read orders ${error}`);
+      throw new Error(`Cannot list complete orders ${error}`);
     }
   }
 
-  async showOrders(orderID: number): Promise<Orders_users[]> {
+  async showOrder(orderID: number): Promise<Orders_users[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE id=$1;`;
@@ -58,11 +58,11 @@ export class OrderModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot read this order's data ${error}`);
+      throw new Error(`Cannot read this order's data: ${error}`);
     }
   }
 
-  async showActiveOrders(orderID: number): Promise<Orders_users[]> {
+  async showActiveOrder(orderID: number): Promise<Orders_users[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE id=$1 AND status='active';`;
@@ -70,11 +70,11 @@ export class OrderModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot read this order's data ${error}`);
+      throw new Error(`Cannot read this active order's data: ${error}`);
     }
   }
 
-  async showCompleteOrders(orderID: number): Promise<Orders_users[]> {
+  async showCompleteOrder(orderID: number): Promise<Orders_users[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE id=$1 AND status='complete';`;
@@ -82,7 +82,7 @@ export class OrderModel {
       conn.release();
       return res.rows[0];
     } catch (error) {
-      throw new Error(`Cannot read this order's data ${error}`);
+      throw new Error(`Cannot read this complete order's data: ${error}`);
     }
   }
 }
