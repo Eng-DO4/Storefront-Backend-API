@@ -7,14 +7,29 @@ import pool from '../database';
 //   quantity: number;
 // };
 
-export type Orders_users = {
+export type Order = {
+  id?: number;
   userID: number;
-  orderID: number;
   status: string;
 };
 
 export class OrderModel {
-  async readOrders(): Promise<Orders_users[]> {
+  async createOrder(myOrder: Order): Promise<Order[]> {
+    try {
+      const conn = await pool.connect();
+      const sql = `INSERT INTO orders (user_id, status) VALUES ($1, $2) RETURNING *;`;
+      const res = await conn.query(sql, [
+        myOrder.userID,
+        myOrder.status,
+      ]);
+      conn.release();
+      return res.rows[0];
+    } catch (error) {
+      throw new Error(`Cannot create an order: ${error}`);
+    }
+  }
+
+  async readOrders(): Promise<Order[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders`;
@@ -26,7 +41,7 @@ export class OrderModel {
     }
   }
 
-  async readActiveOrders(): Promise<Orders_users[]> {
+  async readActiveOrders(): Promise<Order[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE status='active';`;
@@ -38,7 +53,7 @@ export class OrderModel {
     }
   }
 
-  async readCompleteOrders(): Promise<Orders_users[]> {
+  async readCompleteOrders(): Promise<Order[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE status='complete';`;
@@ -50,7 +65,7 @@ export class OrderModel {
     }
   }
 
-  async showOrder(orderID: number): Promise<Orders_users[]> {
+  async showOrder(orderID: number): Promise<Order[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE id=$1;`;
@@ -62,7 +77,7 @@ export class OrderModel {
     }
   }
 
-  async showActiveOrder(orderID: number): Promise<Orders_users[]> {
+  async showActiveOrder(orderID: number): Promise<Order[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE id=$1 AND status='active';`;
@@ -74,7 +89,7 @@ export class OrderModel {
     }
   }
 
-  async showCompleteOrder(orderID: number): Promise<Orders_users[]> {
+  async showCompleteOrder(orderID: number): Promise<Order[]> {
     try {
       const conn = await pool.connect();
       const sql = `SELECT * FROM orders WHERE id=$1 AND status='complete';`;

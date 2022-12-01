@@ -3,6 +3,7 @@ import * as controllers from '../../handlers/orders.controllers';
 
 const routes = Router();
 
+routes.post('/', controllers.create);
 routes.get('/', controllers.indexAll);
 routes.get('/active', controllers.indexActive);
 routes.get('/complete', controllers.indexComplete);

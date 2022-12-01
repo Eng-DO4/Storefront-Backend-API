@@ -10,7 +10,8 @@
     "test": "tsc && set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset",
     "lint:f": "eslint . --fix",
     "format": "prettier --write .",
-    "migration:run": "db-migrate up"
+    "migration:run": "db-migrate up",
+    "migration:destroy": "db-migrate down"
   },
   "repository": {
     "type": "git",

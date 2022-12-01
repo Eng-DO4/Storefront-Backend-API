@@ -28,7 +28,7 @@ export class UserModel {
     try {
       const conn = await pool.connect();
       const sql = `INSERT INTO users (firstname, lastname, email, password) 
-      VALUES ($1, $2, $3, $4) RETURNING *;`;
+      VALUES ($1, $2, $3, $4) RETURNING id, firstname, lastname;`;
       const res = await conn.query(sql, [
         myUser.firstname,
         myUser.lastname,

@@ -54,11 +54,15 @@ you need to follow these sqls to create databases and connect them. run sqls in 
     CREATE DATABASE <database for testing>;
 
     -- run commands in teminal
-    ---- * `npm run migration:run`
-    ---- * `npm run test`
+    ---- * npm run migration:run
+    ---- * npm run test
 
     -- to solve a problem with ids after bad requests
     ALTER SEQUENCE <table name>_id_seq RESTART WITH <the number after last id>;
+
+    -- run command in terminal
+    ---- * npm run migration:destroy
+
 ```
 
 ## Commands to run

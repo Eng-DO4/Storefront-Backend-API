@@ -3,6 +3,22 @@ import { OrderModel } from '../models/orders.models';
 
 const Order = new OrderModel();
 
+export const create = async (req: Request, res: Response) => {
+  try {
+    if (req.body !== undefined) {
+      const order = await Order.createOrder(req.body);
+      res.status(200).json({
+        message: 'order created successfully',
+        data: { ...order }
+      });
+    } else {
+      res.status(400).send('no body content');
+    }
+  } catch (error) {
+    res.status(400).send(`Cannot create this order: ${error}`);
+  }
+};
+
 export const indexAll = async (_req: Request, res: Response) => {
   try {
     const orders = await Order.readOrders();
